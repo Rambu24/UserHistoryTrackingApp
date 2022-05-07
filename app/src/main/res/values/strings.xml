@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ProyectoFinal_LuisChinchilla</string>
+    <string name="imagen_de_libreta">imagen de libreta</string>
+    <string-array name="estados">
+        <item>Pendiente</item>
+        <item>En Proceso</item>
+        <item>Rechazada</item>
+        <item>Finalizada</item>
+    </string-array>
+</resources>
