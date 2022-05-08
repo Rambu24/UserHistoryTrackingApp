@@ -1,6 +1,8 @@
 package com.example.proyectofinal_luischinchilla.entities;
 
-public class UserHistory {
+import java.io.Serializable;
+
+public class UserHistory implements Serializable {
 
     private Integer Id_HU;
     private String Nombre;

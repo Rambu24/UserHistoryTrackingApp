@@ -1,6 +1,8 @@
 package com.example.proyectofinal_luischinchilla;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -64,14 +66,49 @@ public class MainActivity3 extends AppCompatActivity {
             fila.close();
         }else{
 
-            //Se crea la base de datos bd y se establece para escritura con método getWritableDatabase()
-            SQLiteDatabase db = admin.getWritableDatabase();
             String Id_HU = etHUid.getText().toString();
             String Nombre = etNombre.getText().toString();
             String Posicion = etPosicion.getText().toString();
             String Funcion = etFuncion.getText().toString();
             String Objetivo = etObjetivo.getText().toString();
             String Estado = "Pendiente";
+
+
+            validarEditText(admin, Id_HU, Nombre, Posicion, Funcion, Objetivo, Estado, v);
+
+        }
+
+    }
+
+    private void validarEditText(AdminSQLiteOpenHelper admin,String Id_HU, String Nombre, String Posicion, String Funcion, String Objetivo,String Estado, View v){
+        if(Id_HU.length() == 0){
+            Toast notificacion = Toast.makeText(this, "Ingrese el número de HU", Toast.LENGTH_LONG);
+            notificacion.show();
+            etHUid.setError("Campo vacío");
+            etHUid.requestFocus();
+        }else if(Nombre.length() == 0){
+            Toast notificacion = Toast.makeText(this, "Ingrese un nombre para la HU", Toast.LENGTH_LONG);
+            notificacion.show();
+            etNombre.setError("Campo vacío");
+            etNombre.requestFocus();
+        }else if(Posicion.length() == 0){
+            Toast notificacion = Toast.makeText(this, "Ingrese su posición", Toast.LENGTH_LONG);
+            notificacion.show();
+            etPosicion.setError("Campo vacío");
+            etPosicion.requestFocus();
+        }else if(Funcion.length() == 0){
+            Toast notificacion = Toast.makeText(this, "Ingrese una Funcionalidad", Toast.LENGTH_LONG);
+            notificacion.show();
+            etFuncion.setError("Campo vacío");
+            etFuncion.requestFocus();
+        }else if(Objetivo.length() == 0){
+            Toast notificacion = Toast.makeText(this, "Ingrese el objetivo de la HU", Toast.LENGTH_LONG);
+            notificacion.show();
+            etObjetivo.setError("Campo vacío");
+            etObjetivo.requestFocus();
+        }else{
+            //Se crea la base de datos bd y se establece para escritura con método getWritableDatabase()
+            SQLiteDatabase db = admin.getWritableDatabase();
 
             //Se declara un tipo de dato COntentValues para contener los valores
             ContentValues registro = new ContentValues();
@@ -95,16 +132,9 @@ public class MainActivity3 extends AppCompatActivity {
             //Se muestra el msj de éxito
             Toast.makeText(this, "HU guardada exitosamente. Registro: "+idResultante, Toast.LENGTH_SHORT).show();
             //Cerramos la bd
-            bd.close();
-
+            db.close();
         }
-
-
-
-
-
-
-
-
     }
+
+
 }

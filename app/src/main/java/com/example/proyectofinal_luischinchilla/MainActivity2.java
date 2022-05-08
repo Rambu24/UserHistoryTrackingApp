@@ -31,10 +31,14 @@ public class MainActivity2 extends AppCompatActivity {
         //Se crea un nuevo intent para el MainActivity.class
         Intent intent3 = new Intent(v.getContext(), MainActivity4.class);
 
-
-
         //Se inicia y pasa el intent al Bundle del OS
         startActivity(intent3);
     }
+
+    public void VerLista(View v){
+        Intent intent4 = new Intent(v.getContext(), MainActivity5.class);
+        startActivity(intent4);
+    }
+
 
 }

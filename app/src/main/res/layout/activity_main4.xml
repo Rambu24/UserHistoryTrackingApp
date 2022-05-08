@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#222121"
+    android:background="#954C47"
     tools:context=".MainActivity4">
 
     <ScrollView
@@ -26,7 +26,7 @@
                 app:srcCompat="@drawable/busqueda" />
 
             <TextView
-                android:id="@+id/tvDigiteHU"
+                android:id="@+id/tvHUDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -34,7 +34,7 @@
                 android:textColor="#F4F4F4" />
 
             <EditText
-                android:id="@+id/txtNumeroHU"
+                android:id="@+id/txtHUDetail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="#F4F4F4"
@@ -71,7 +71,7 @@
                 android:textColor="#954C47" />
 
             <TextView
-                android:id="@+id/tvNombre"
+                android:id="@+id/tvNombreDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -79,7 +79,7 @@
                 android:textColor="#F4F4F4" />
 
             <EditText
-                android:id="@+id/txtNombreUpdate"
+                android:id="@+id/txtNombreDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F4F4F4"
@@ -91,7 +91,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
-                android:id="@+id/tvComo"
+                android:id="@+id/tvSolicitanteDetail"
                 android:layout_width="186dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -99,7 +99,7 @@
                 android:textColor="#F4F4F4" />
 
             <EditText
-                android:id="@+id/txtComo"
+                android:id="@+id/txtPuestoDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F4F4F4"
@@ -120,7 +120,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/tvEstado"
+                        android:id="@+id/tvEstadoDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
@@ -128,7 +128,7 @@
                         android:textColor="#F4F4F4" />
 
                     <TextView
-                        android:id="@+id/tvEstadoActual"
+                        android:id="@+id/tvEstadoActualDetail"
                         android:layout_width="203dp"
                         android:layout_height="wrap_content"
                         android:textColor="#F4F4F4" />
@@ -169,7 +169,7 @@
                     android:textColor="#F4F4F4" />
 
                 <EditText
-                    android:id="@+id/txtDetailUpdate"
+                    android:id="@+id/txtDetailHU"
                     android:layout_width="match_parent"
                     android:layout_height="121dp"
                     android:backgroundTint="#F4F4F4"
@@ -188,7 +188,7 @@
                     android:textColor="#F4F4F4" />
 
                 <EditText
-                    android:id="@+id/txtParaUpdate"
+                    android:id="@+id/txtObjetivoDetail"
                     android:layout_width="match_parent"
                     android:layout_height="121dp"
                     android:backgroundTint="#F4F4F4"

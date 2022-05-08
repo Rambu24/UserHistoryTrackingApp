@@ -8,7 +8,7 @@
     tools:context=".MainActivity2">
 
     <TextView
-        android:id="@+id/tvNombreApp"
+        android:id="@+id/tvDetalleHistoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvMenuPrincipal"
+        android:id="@+id/tvIdHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
@@ -31,7 +31,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNombreApp" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetalleHistoria" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -40,7 +40,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMenuPrincipal">
+        app:layout_constraintTop_toBottomOf="@+id/tvIdHistory">
 
         <RadioButton
             android:id="@+id/rbJefatura"
@@ -112,6 +112,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/button_rounded"
+        android:onClick="VerLista"
         android:text="Ver Listado"
         android:textColor="#954C47"
         android:textStyle="bold"

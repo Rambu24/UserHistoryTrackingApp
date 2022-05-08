@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.AdapterView;
-import android.widget.AdapterViewAnimator;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,6 +32,7 @@ public class MainActivity4 extends AppCompatActivity {
     AdminSQLiteOpenHelper conn;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +41,12 @@ public class MainActivity4 extends AppCompatActivity {
         conn = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
 
         //Se traen los datos que se colocan en el Layout
-        etHUid = (EditText) findViewById(R.id.txtNumeroHU);
-        etNombre = (EditText) findViewById(R.id.txtNombreUpdate);
-        etPosicion = (EditText) findViewById(R.id.txtComo);
-        etFuncion = (EditText) findViewById(R.id.txtDetailUpdate);
-        etObjetivo = (EditText) findViewById(R.id.txtParaUpdate);
-        tvEstActual = (TextView) findViewById(R.id.tvEstadoActual);
+        etHUid = (EditText) findViewById(R.id.txtHUDetail);
+        etNombre = (EditText) findViewById(R.id.txtNombreDetail);
+        etPosicion = (EditText) findViewById(R.id.txtPuestoDetail);
+        etFuncion = (EditText) findViewById(R.id.txtDetailHU);
+        etObjetivo = (EditText) findViewById(R.id.txtObjetivoDetail);
+        tvEstActual = (TextView) findViewById(R.id.tvEstadoActualDetail);
 
 
         //Se declara la instancia para los objetos Spinner
@@ -67,12 +67,14 @@ public class MainActivity4 extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
+                    etHUid.setText(selecHUListCLS.get(position-1).getId_HU().toString());
                     etNombre.setText(selecHUListCLS.get(position-1).getNombre());
                     etPosicion.setText(selecHUListCLS.get(position-1).getPosicion());
                     etFuncion.setText(selecHUListCLS.get(position-1).getFuncion());
                     etObjetivo.setText(selecHUListCLS.get(position-1).getObjetivo());
                     tvEstActual.setText(selecHUListCLS.get(position-1).getEstado());
                 }else{
+                    etHUid.setText("");
                     etNombre.setText("");
                     etPosicion.setText("");
                     etFuncion.setText("");
@@ -87,9 +89,7 @@ public class MainActivity4 extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        }
-
-        );
+        });
 
 
     }
@@ -141,6 +141,7 @@ public class MainActivity4 extends AppCompatActivity {
         //Se abre la conexión
         SQLiteDatabase bd = conn.getWritableDatabase();
         //Se obtiene el texto ingresado por el usuario
+
         String[] parametros = {etHUid.getText().toString()};
 
         //Se obtiene el texto ingresado por el usuario
@@ -185,6 +186,7 @@ public class MainActivity4 extends AppCompatActivity {
 
         //Se abre la conexión
         SQLiteDatabase bd = conn.getWritableDatabase();
+
         //Se obtiene el texto ingresado por el usuario
         String[] parametros = {etHUid.getText().toString()};
 
@@ -213,7 +215,7 @@ public class MainActivity4 extends AppCompatActivity {
     private void limpiar(){
         //Se limpian todos los edittext para dejarlos listos para el siguiente registro
         etHUid.setText(""); etNombre.setText(""); etPosicion.setText(""); etFuncion.setText(""); etObjetivo.setText("");
-        tvEstActual.setText("");
+        tvEstActual.setText(""); sListaSeleccionHU.setSelection(0);
     }
 
     private void consultarListaSelecHU(){
@@ -244,7 +246,7 @@ public class MainActivity4 extends AppCompatActivity {
         listaSelecHU.add("Seleccione HU:");
 
         for(int i=0; i<selecHUListCLS.size(); i++){
-            listaSelecHU.add(selecHUListCLS.get(i).getId_HU().toString());
+            listaSelecHU.add("HU-"+selecHUListCLS.get(i).getId_HU().toString()+" "+ selecHUListCLS.get(i).getNombre());
 
         }
     }
