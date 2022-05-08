@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             //intent.putExtra("paramIdentificacion", identificacionUsuario.toString());
 
             //Se inicia y pasa el intent al Bundle del OS
-            startActivityForResult(intent, 0);
+            startActivity(intent);
         }else{
             Toast notificacion = Toast.makeText(this, "Contraseña o Usuario Incorrectos", Toast.LENGTH_LONG);
             notificacion.show();
