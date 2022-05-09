@@ -28,10 +28,14 @@ public class MainActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
+        Bundle bundle   = getIntent().getExtras();
+        String posicionImportada = bundle.getString("paramPuesto");
+
         //Se traen los datos que se colocan en el Layout
         etHUid = (EditText) findViewById(R.id.txtHUCreate);
         etNombre = (EditText) findViewById(R.id.txtNombreCreate);
         etPosicion = (EditText) findViewById(R.id.txtComoCreate);
+        etPosicion.setText(posicionImportada);
         etFuncion = (EditText) findViewById(R.id.txtDetailCreate);
         etObjetivo = (EditText) findViewById(R.id.txtParaCreate);
 
@@ -72,15 +76,19 @@ public class MainActivity3 extends AppCompatActivity {
             String Funcion = etFuncion.getText().toString();
             String Objetivo = etObjetivo.getText().toString();
             String Estado = "Pendiente";
+            boolean finanzas = cbxFinanzas.isChecked();
+            boolean comercial = cbxComercial.isChecked();
+            boolean produccion = cbxProduccion.isChecked();
 
-
-            validarEditText(admin, Id_HU, Nombre, Posicion, Funcion, Objetivo, Estado, v);
+            validarEditText(admin, Id_HU, Nombre, Posicion, Funcion, Objetivo, Estado,finanzas, comercial, produccion, v);
 
         }
 
     }
 
-    private void validarEditText(AdminSQLiteOpenHelper admin,String Id_HU, String Nombre, String Posicion, String Funcion, String Objetivo,String Estado, View v){
+    private void validarEditText(AdminSQLiteOpenHelper admin,String Id_HU, String Nombre, String Posicion, String Funcion, String Objetivo,String Estado,
+                                 boolean finanzas, boolean comercial, boolean produccion, View v){
+
         if(Id_HU.length() == 0){
             Toast notificacion = Toast.makeText(this, "Ingrese el número de HU", Toast.LENGTH_LONG);
             notificacion.show();
@@ -106,13 +114,27 @@ public class MainActivity3 extends AppCompatActivity {
             notificacion.show();
             etObjetivo.setError("Campo vacío");
             etObjetivo.requestFocus();
+        }else if(finanzas==false && comercial == false && produccion == false){
+            Toast notificacion = Toast.makeText(this, "Debe seleccionar al menos un departamento", Toast.LENGTH_LONG);
+            notificacion.show();
         }else{
             //Se crea la base de datos bd y se establece para escritura con método getWritableDatabase()
+
             SQLiteDatabase db = admin.getWritableDatabase();
 
             //Se declara un tipo de dato COntentValues para contener los valores
             ContentValues registro = new ContentValues();
             //A este se le pasa lo que se obtuvo del activity
+
+            if(finanzas == true){
+                Nombre += " - "+cbxFinanzas.getText().toString();
+            }
+            if(comercial == true){
+                Nombre += " - "+cbxComercial.getText().toString();
+            }
+            if(produccion == true){
+                Nombre += " - "+cbxProduccion.getText().toString();
+            }
 
             registro.put(Utilities.CAMPO_ID_HU, Id_HU);
             registro.put(Utilities.CAMPO_NOMBRE, Nombre);

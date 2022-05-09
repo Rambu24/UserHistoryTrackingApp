@@ -68,8 +68,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(v.getContext(), MainActivity2.class);
 
             //Se pasan los parámetros de los Edit Text
-            //intent.putExtra("paramUsuario", etUsuario.getText().toString());
-            //intent.putExtra("paramIdentificacion", identificacionUsuario.toString());
+            intent.putExtra("paramUsuario", etUser.getText().toString());
 
             //Se inicia y pasa el intent al Bundle del OS
             startActivity(intent);

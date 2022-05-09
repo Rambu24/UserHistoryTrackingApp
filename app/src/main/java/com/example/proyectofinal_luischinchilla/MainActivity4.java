@@ -1,7 +1,9 @@
 package com.example.proyectofinal_luischinchilla;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,6 +35,7 @@ public class MainActivity4 extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,37 +63,38 @@ public class MainActivity4 extends AppCompatActivity {
 
         consultarListaSelecHU();
 
+
+
         ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaSelecHU);
         sListaSeleccionHU.setAdapter(adaptador);
 
-        sListaSeleccionHU.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position!=0){
-                    etHUid.setText(selecHUListCLS.get(position-1).getId_HU().toString());
-                    etNombre.setText(selecHUListCLS.get(position-1).getNombre());
-                    etPosicion.setText(selecHUListCLS.get(position-1).getPosicion());
-                    etFuncion.setText(selecHUListCLS.get(position-1).getFuncion());
-                    etObjetivo.setText(selecHUListCLS.get(position-1).getObjetivo());
-                    tvEstActual.setText(selecHUListCLS.get(position-1).getEstado());
-                }else{
-                    etHUid.setText("");
-                    etNombre.setText("");
-                    etPosicion.setText("");
-                    etFuncion.setText("");
-                    etObjetivo.setText("");
-                    tvEstActual.setText("");
+            sListaSeleccionHU.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (position!=0){
+                        etHUid.setText(selecHUListCLS.get(position-1).getId_HU().toString());
+                        etNombre.setText(selecHUListCLS.get(position-1).getNombre());
+                        etPosicion.setText(selecHUListCLS.get(position-1).getPosicion());
+                        etFuncion.setText(selecHUListCLS.get(position-1).getFuncion());
+                        etObjetivo.setText(selecHUListCLS.get(position-1).getObjetivo());
+                        tvEstActual.setText(selecHUListCLS.get(position-1).getEstado());
+                    }else{
+                        etHUid.setText("");
+                        etNombre.setText("");
+                        etPosicion.setText("");
+                        etFuncion.setText("");
+                        etObjetivo.setText("");
+                        tvEstActual.setText("");
+                    }
+
+
                 }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+                }
+            });
 
     }
 
@@ -98,7 +102,6 @@ public class MainActivity4 extends AppCompatActivity {
     public void Consultar( View v){
         //Se abre la conexión
         SQLiteDatabase bd = conn.getReadableDatabase();
-
 
 
         //Se obtiene el texto ingresado por el usuario
@@ -127,6 +130,7 @@ public class MainActivity4 extends AppCompatActivity {
             //Si no, la HU no existe
             Toast.makeText(this,"No existe ninguna HU con ese número", Toast.LENGTH_SHORT).show();
             limpiar();
+            consultarListaSelecHU();
         }
 
     }
@@ -141,6 +145,7 @@ public class MainActivity4 extends AppCompatActivity {
         //Se abre la conexión
         SQLiteDatabase bd = conn.getWritableDatabase();
         //Se obtiene el texto ingresado por el usuario
+
 
         String[] parametros = {etHUid.getText().toString()};
 
@@ -178,6 +183,15 @@ public class MainActivity4 extends AppCompatActivity {
         bd.close();
         //Limpiamos todos los edittext para dejarlos listos para el siguiente registro
         limpiar();
+//        Intent anterior = new Intent(this.getApplicationContext(), MainActivity2.class);
+//        startActivity(anterior);
+        consultarListaSelecHU();
+
+
+
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaSelecHU);
+        sListaSeleccionHU.setAdapter(adaptador);
+
     }
 
 
@@ -186,6 +200,8 @@ public class MainActivity4 extends AppCompatActivity {
 
         //Se abre la conexión
         SQLiteDatabase bd = conn.getWritableDatabase();
+
+
 
         //Se obtiene el texto ingresado por el usuario
         String[] parametros = {etHUid.getText().toString()};
@@ -208,6 +224,15 @@ public class MainActivity4 extends AppCompatActivity {
 
         //Se limpian todos los edittext para dejarlos listos para el siguiente registro
         limpiar();
+//        Intent intent7 = new Intent(v.getContext(), MainActivity2.class);
+//        startActivity(intent7);
+        consultarListaSelecHU();
+
+
+
+        ArrayAdapter<CharSequence> adaptador = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaSelecHU);
+        sListaSeleccionHU.setAdapter(adaptador);
+
 
     }
 
@@ -246,7 +271,7 @@ public class MainActivity4 extends AppCompatActivity {
         listaSelecHU.add("Seleccione HU:");
 
         for(int i=0; i<selecHUListCLS.size(); i++){
-            listaSelecHU.add("HU-"+selecHUListCLS.get(i).getId_HU().toString()+" "+ selecHUListCLS.get(i).getNombre());
+            listaSelecHU.add("HU-"+selecHUListCLS.get(i).getId_HU().toString()+" "+selecHUListCLS.get(i).getNombre());
 
         }
     }
