@@ -100,6 +100,7 @@ public class MainActivity4 extends AppCompatActivity {
 
 
     public void Consultar( View v){
+
         //Se abre la conexión
         SQLiteDatabase bd = conn.getReadableDatabase();
 
@@ -142,49 +143,54 @@ public class MainActivity4 extends AppCompatActivity {
 
 
     public void Actualizar(View v){
-        //Se abre la conexión
-        SQLiteDatabase bd = conn.getWritableDatabase();
-        //Se obtiene el texto ingresado por el usuario
+        try{
+            //Se abre la conexión
+            SQLiteDatabase bd = conn.getWritableDatabase();
+            //Se obtiene el texto ingresado por el usuario
 
 
-        String[] parametros = {etHUid.getText().toString()};
+            String[] parametros = {etHUid.getText().toString()};
 
-        //Se obtiene el texto ingresado por el usuario
-        String Nombre = etNombre.getText().toString();
-        String Posicion = etPosicion.getText().toString();
-        String Funcion = etFuncion.getText().toString();
-        String Objetivo = etObjetivo.getText().toString();
-        String Estado = sListaEstados.getSelectedItem().toString();
+            //Se obtiene el texto ingresado por el usuario
+            String Nombre = etNombre.getText().toString();
+            String Posicion = etPosicion.getText().toString();
+            String Funcion = etFuncion.getText().toString();
+            String Objetivo = etObjetivo.getText().toString();
+            String Estado = sListaEstados.getSelectedItem().toString();
 
-        //Se declara un nuevo tipo de dato para contener los valores llamado ContentValues
-        ContentValues registro = new ContentValues();
+            //Se declara un nuevo tipo de dato para contener los valores llamado ContentValues
+            ContentValues registro = new ContentValues();
 
-        //se agrega a ese objeto lo que se trajo del activiy
-        registro.put(Utilities.CAMPO_NOMBRE, Nombre);
-        registro.put(Utilities.CAMPO_POSICION, Posicion);
-        registro.put(Utilities.CAMPO_FUNCION, Funcion);
-        registro.put(Utilities.CAMPO_OBJETIVO, Objetivo);
-        registro.put(Utilities.CAMPO_ESTADO, Estado);
+            //se agrega a ese objeto lo que se trajo del activiy
+            registro.put(Utilities.CAMPO_NOMBRE, Nombre);
+            registro.put(Utilities.CAMPO_POSICION, Posicion);
+            registro.put(Utilities.CAMPO_FUNCION, Funcion);
+            registro.put(Utilities.CAMPO_OBJETIVO, Objetivo);
+            registro.put(Utilities.CAMPO_ESTADO, Estado);
 
-        //Se declara un entero que invoca la bd el método update (el cuál por parámetros recibe el
-        //nombre de la tabla, los datos a actualizar en un ContentValue, la condición de la cédula
-        //a Actualizar y los posibles argumentos)
-        int cant = bd.update(Utilities.TABLA_USER_HISTORY, registro, Utilities.CAMPO_ID_HU+"=?", parametros);
+            //Se declara un entero que invoca la bd el método update (el cuál por parámetros recibe el
+            //nombre de la tabla, los datos a actualizar en un ContentValue, la condición de la cédula
+            //a Actualizar y los posibles argumentos)
+            int cant = bd.update(Utilities.TABLA_USER_HISTORY, registro, Utilities.CAMPO_ID_HU+"=?", parametros);
 
 
-        //Si la variable cantidad es mayor o igual a 1, el usuario se actualizó correctamente
-        if(cant ==1){
-            Toast.makeText(this, "Datos actualizados con éxito",Toast.LENGTH_SHORT).show();
-        }else {
-            //Si no, la HU no existe
-            Toast.makeText(this, "No existe ninguna HU con ese número", Toast.LENGTH_SHORT).show();
-        }
-        //Se cierra la conexión
-        bd.close();
+            //Si la variable cantidad es mayor o igual a 1, el usuario se actualizó correctamente
+            if(cant ==1){
+                Toast.makeText(this, "Datos actualizados con éxito",Toast.LENGTH_SHORT).show();
+            }else {
+                //Si no, la HU no existe
+                Toast.makeText(this, "No existe ninguna HU con ese número", Toast.LENGTH_SHORT).show();
+            }
+            //Se cierra la conexión
+            bd.close();
+
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),"Error: "+e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+        };
+
+
         //Limpiamos todos los edittext para dejarlos listos para el siguiente registro
         limpiar();
-//        Intent anterior = new Intent(this.getApplicationContext(), MainActivity2.class);
-//        startActivity(anterior);
         consultarListaSelecHU();
 
 
@@ -197,35 +203,39 @@ public class MainActivity4 extends AppCompatActivity {
 
 
     public void Eliminar(View v){
-
-        //Se abre la conexión
-        SQLiteDatabase bd = conn.getWritableDatabase();
-
-
-
-        //Se obtiene el texto ingresado por el usuario
-        String[] parametros = {etHUid.getText().toString()};
+        try{
+            //Se abre la conexión
+            SQLiteDatabase bd = conn.getWritableDatabase();
 
 
-        //Se declara un entero que invoca de la base de datos el método delete(el cual por parámetro
-        //recibe el nombre de la tabla, la validación y los posibles argumentos)
-        int cant = bd.delete(Utilities.TABLA_USER_HISTORY, Utilities.CAMPO_ID_HU+"=?", parametros);
 
-        //Si la variable es igual o mayor a 1, el usuario se eliminó correctamente
-        if (cant == 1){
-            Toast.makeText(this, "HU Eliminada", Toast.LENGTH_SHORT).show();
-        }else{
-            //Si el usuario no existe
-            Toast.makeText(this, "No existe ninguna HU con ese número", Toast.LENGTH_SHORT).show();
-        }
+            //Se obtiene el texto ingresado por el usuario
+            String[] parametros = {etHUid.getText().toString()};
 
-        //Se cierra la conexión
-        bd.close();
+
+            //Se declara un entero que invoca de la base de datos el método delete(el cual por parámetro
+            //recibe el nombre de la tabla, la validación y los posibles argumentos)
+            int cant = bd.delete(Utilities.TABLA_USER_HISTORY, Utilities.CAMPO_ID_HU+"=?", parametros);
+
+            //Si la variable es igual o mayor a 1, el usuario se eliminó correctamente
+            if (cant == 1){
+                Toast.makeText(this, "HU Eliminada", Toast.LENGTH_SHORT).show();
+            }else{
+                //Si el usuario no existe
+                Toast.makeText(this, "No existe ninguna HU con ese número", Toast.LENGTH_SHORT).show();
+            }
+
+            //Se cierra la conexión
+            bd.close();
+
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),"Error: "+e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+        };
+
+
 
         //Se limpian todos los edittext para dejarlos listos para el siguiente registro
         limpiar();
-//        Intent intent7 = new Intent(v.getContext(), MainActivity2.class);
-//        startActivity(intent7);
         consultarListaSelecHU();
 
 

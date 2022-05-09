@@ -62,24 +62,31 @@ public class MainActivity5 extends AppCompatActivity {
     }
 
     private void consultarListaPersonas() {
-        SQLiteDatabase db = conn.getReadableDatabase();
+        try{
+            SQLiteDatabase db = conn.getReadableDatabase();
 
-        UserHistory history = null;
-        listaHistorias = new ArrayList<UserHistory>();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+ Utilities.TABLA_USER_HISTORY, null);
+            UserHistory history = null;
+            listaHistorias = new ArrayList<UserHistory>();
+            Cursor cursor = db.rawQuery("SELECT * FROM "+ Utilities.TABLA_USER_HISTORY, null);
 
-        while (cursor.moveToNext()){
-            history = new UserHistory();
-            history.setId_HU(cursor.getInt(0));
-            history.setNombre(cursor.getString(1));
-            history.setPosicion(cursor.getString(2));
-            history.setFuncion(cursor.getString(3));
-            history.setObjetivo(cursor.getString(4));
-            history.setEstado(cursor.getString(5));
+            while (cursor.moveToNext()){
+                history = new UserHistory();
+                history.setId_HU(cursor.getInt(0));
+                history.setNombre(cursor.getString(1));
+                history.setPosicion(cursor.getString(2));
+                history.setFuncion(cursor.getString(3));
+                history.setObjetivo(cursor.getString(4));
+                history.setEstado(cursor.getString(5));
 
-            listaHistorias.add(history);
-        }
-        obtenerLista();
+                listaHistorias.add(history);
+            }
+            obtenerLista();
+
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),"Error: "+e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+        };
+
+
     }
 
     private void obtenerLista() {
